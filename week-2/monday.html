@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adding Settings</title>
+</head>
+
+<body>
+  <script>
+    const Convert = (function () {
+      function checkValidInput(weight) {
+        if (typeof weight !== "number") throw new Error('Please enter a number as an argument')
+      }
+
+      function weightToMg(weight, units) {
+        if (units === 'grams') return weight * 1000
+        if (units === 'kg') return weight * 1000 * 1000
+        return weight
+      }
+
+      function Constructor(weight, options = {}) {
+        checkValidInput(weight)
+
+
+        // combine user options and default settings
+        let settings = Object.assign({
+          units: "mg"
+        }, options)
+
+        // Make sure valid units were provided
+        if (!['mg', 'grams', 'kg'].includes(settings.units)) {
+          throw `[Convert.js]: "${settings.units}" is not a valid weight`;
+        }
+
+        this.weight = weightToMg(weight, settings.units)
+      }
+
+      Constructor.prototype.inMg = function () {
+        return this.weight
+      }
+
+      Constructor.prototype.inGrams = function () {
+        return this.weight / 1000
+      }
+
+      Constructor.prototype.inKg = function () {
+        return this.weight / (1000 * 1000)
+      }
+
+      Constructor.prototype.addMg = function (weight) {
+        this.weight = this.weight + (weight)
+
+        return this
+      }
+
+      Constructor.prototype.addGrams = function (weight) {
+        this.weight = this.weight + (weight * 1000)
+
+        return this
+      }
+
+      Constructor.prototype.addKg = function (weight) {
+        this.weight = this.weight + (weight * 1000 * 1000)
+
+        return this
+      }
+
+      return Constructor
+    })()
+  </script>
+</body>
+
+</html>
