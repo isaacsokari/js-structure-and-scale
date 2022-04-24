@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weight Conversion Library</title>
+</head>
+<body>
+  <script>
+    const convert = (function() {
+      function checkValidInput(weight) {
+        if (typeof weight !== "number") throw new Error('Please enter a number as an argument')
+      }
+      
+      function gramsToKilograms(weightInGrams) {
+        checkValidInput(weightInGrams)
+
+        return weightInGrams/1000
+      }
+
+      function gramsToMilligrams(weightInGrams) {
+        checkValidInput(weightInGrams)
+
+        return weightInGrams*1000
+      }
+
+      function kilogramsToGrams(weightInKilograms) {
+        checkValidInput(weightInKilograms)
+
+        return weightInKilograms*1000
+      }
+
+      function kilogramsToMilligrams(weightInKilograms) {
+        checkValidInput(weightInKilograms)
+
+        return weightInKilograms*1000*1000
+      }
+      
+      function milligramsToGrams(weightInMilligrams) {
+        checkValidInput(weightInMilligrams)
+
+        return weightInMilligrams/1000
+      }
+      
+      function milligramsToKilograms(weightInMilligrams) {
+        checkValidInput(weightInMilligrams)
+
+        return weightInMilligrams/(1000*1000)
+      }
+
+      return {
+        kilogramsToGrams,
+        kilogramsToMilligrams,
+        gramsToKilograms,
+        gramsToMilligrams,
+        milligramsToGrams,
+        milligramsToKilograms,
+
+        // aliases
+        kgsToGrams: kilogramsToGrams,
+        kgsToMg: kilogramsToMilligrams,
+        gramsToKg: gramsToKilograms,
+        gramsToMg: gramsToMilligrams,
+        mgToGrams: milligramsToGrams,
+        mgToKg: milligramsToKilograms
+      }
+    })()
+  </script>
+  
+</body>
+</html>
