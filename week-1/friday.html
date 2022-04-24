@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chaining Methods</title>
+</head>
+
+<body>
+  <script>
+    const Convert = (function () {
+      function checkValidInput(weight) {
+        if (typeof weight !== "number") throw new Error('Please enter a number as an argument')
+      }
+
+      function Constructor(weightInMilligrams) {
+        checkValidInput(weightInMilligrams)
+
+        this.weight = weightInMilligrams
+      }
+
+      Constructor.prototype.inMg = function () {
+        return this.weight
+      }
+
+      Constructor.prototype.inGrams = function () {
+        return this.weight / 1000
+      }
+
+      Constructor.prototype.inKg = function () {
+        return this.weight / (1000 * 1000)
+      }
+
+      Constructor.prototype.addMg = function (weight) {
+        this.weight = this.weight + (weight)
+
+        return this
+      }
+
+      Constructor.prototype.addGrams = function (weight) {
+        this.weight = this.weight + (weight * 1000)
+
+        return this
+      }
+
+      Constructor.prototype.addKg = function (weight) {
+        this.weight = this.weight + (weight * 1000 * 1000)
+
+        return this
+      }
+
+      return Constructor
+    })()
+  </script>
+</body>
+
+</html>
