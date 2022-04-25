@@ -60,43 +60,49 @@ const Constructor = (function () {
   Constructor.prototype.addSeconds = function addSeconds(seconds) {
     checkValidNumber(seconds);
 
-    const newTime = this.date.getSeconds() + seconds;
-    return new Constructor(newTime, this._settings);
+    const newDate = new Date(this.date);
+    newDate.setSeconds(newDate.getSeconds() + seconds);
+    return new Constructor(newDate, this._settings);
   };
 
   Constructor.prototype.addMinutes = function addMinutes(minutes) {
     checkValidNumber(minutes);
 
-    const newTime = this.date.getMinutes() + minutes;
-    return new Constructor(newTime, this._settings);
+    const newDate = new Date(this.date);
+    newDate.setMinutes(newDate.getMinutes() + minutes);
+    return new Constructor(newDate, this._settings);
   };
 
   Constructor.prototype.addHours = function addHours(hours) {
     checkValidNumber(hours);
 
-    const newTime = this.date.getHours() + hours;
-    return new Constructor(newTime, this._settings);
+    const newDate = new Date(this.date);
+    newDate.setHours(newDate.getHours() + hours);
+    return new Constructor(newDate, this._settings);
   };
 
   Constructor.prototype.addDays = function addDays(days) {
     checkValidNumber(days);
 
-    const newTime = this.date.getDate() + days;
-    return new Constructor(newTime, this._settings);
+    const newDate = new Date(this.date);
+    newDate.setDate(newDate.getDate() + days);
+    return new Constructor(newDate, this._settings);
   };
 
   Constructor.prototype.addMonths = function addMonths(months) {
     checkValidNumber(months);
 
-    const newTime = this.date.getMonth() + months;
-    return new Constructor(newTime, this._settings);
+    const newDate = new Date(this.date);
+    newDate.setMonth(newDate.getMonth() + months);
+    return new Constructor(newDate, this._settings);
   };
 
   Constructor.prototype.addYears = function addYears(years) {
     checkValidNumber(years);
 
-    const newTime = this.date.getFullYear() + years;
-    return new Constructor(newTime, this._settings);
+    const newDate = new Date(this.date);
+    newDate.setFullYear(newDate.getFullYear() + years);
+    return new Constructor(newDate, this._settings);
   };
 
   return Constructor;
