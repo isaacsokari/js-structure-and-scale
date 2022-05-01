@@ -54,12 +54,12 @@ function clickHandler(event) {
 
   // Get place ID
   let id = btn.getAttribute('data-fave');
-  let addOrRemoveText = btn.querySelector('.addOrRemoveText');
+  // let addOrRemoveText = btn.querySelector('.addOrRemoveText');
 
   // Update button UI and save
   if (btn.classList.contains('is-active')) {
     btn.classList.remove('is-active');
-    addOrRemoveText.innerText = 'Add';
+    // addOrRemoveText.innerText = 'Add';
     btn.setAttribute('aria-pressed', 'false');
     removeFave(id);
   } else {
@@ -107,7 +107,7 @@ function loadIcons() {
 
   // Create an icon
   let icon = document.createElement('span');
-  icon.setAttribute('aria-hidden', 'true');
+  icon.setAttribute('aria-label', '(Favorite)');
   icon.textContent = ' ♥';
 
   // Loop through each place and add an icon if it's a favorite
