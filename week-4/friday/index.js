@@ -54,12 +54,12 @@ function clickHandler(event) {
 
   // Get place ID
   let id = btn.getAttribute('data-fave');
-  // let addOrRemoveText = btn.querySelector('.addOrRemoveText');
+  let addOrRemoveText = btn.querySelector('.addOrRemoveText');
 
   // Update button UI and save
   if (btn.classList.contains('is-active')) {
     btn.classList.remove('is-active');
-    // addOrRemoveText.innerText = 'Add';
+    addOrRemoveText.innerText = 'Add';
     btn.setAttribute('aria-pressed', 'false');
     removeFave(id);
   } else {
