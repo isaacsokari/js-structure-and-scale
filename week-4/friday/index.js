@@ -54,17 +54,13 @@ function clickHandler(event) {
 
   // Get place ID
   let id = btn.getAttribute('data-fave');
-  let addOrRemoveText = btn.querySelector('.addOrRemoveText');
+  let state = btn.getAttribute('aria-pressed');
 
   // Update button UI and save
-  if (btn.classList.contains('is-active')) {
-    btn.classList.remove('is-active');
-    addOrRemoveText.innerText = 'Add';
+  if (state === 'true') {
     btn.setAttribute('aria-pressed', 'false');
     removeFave(id);
   } else {
-    btn.classList.add('is-active');
-    addOrRemoveText.innerText = 'Remove';
     btn.setAttribute('aria-pressed', 'true');
     addFave(id);
   }
@@ -87,13 +83,9 @@ function loadButtons() {
 			<button
         type="button"
         data-fave="${id}" 
-        ${isFave(id) ? 'class="is-active"' : ''}" 
         aria-pressed="${isFave(id) ? 'true' : 'false'}"
       >
-          <span aria-hidden="true">♥</span> <span class="visually-hidden">
-          <span class="addOrRemoveText">${
-            isFave(id) ? 'Remove' : 'Add'
-          }</span> Place as</span> Favorite
+          <span aria-hidden="true">♥</span> Favorite
 			</button>
 		`;
 }

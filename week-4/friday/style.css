@@ -79,7 +79,7 @@ button:hover {
   background-color: #e5e5e5;
 }
 
-[data-fave].is-active {
+[data-fave][aria-pressed='true'] {
   background-color: #de391f;
   border-color: #de391f;
   color: #ffffff;
