@@ -11,7 +11,7 @@ export default formats.map(function (format) {
     input: './src/time.js',
     output: {
       file: `./dist/time${format === 'iife' ? '' : `.${format}`}.js`,
-      format: 'iife',
+      format: format,
       name: 'Time',
       banner: banner,
     },
