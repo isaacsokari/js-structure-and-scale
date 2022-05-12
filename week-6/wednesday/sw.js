@@ -1,4 +1,4 @@
-let coreAssets = ['offline.html', 'style.css', 'home.js', 'place.js'];
+let coreAssets = ['offline.html', 'style.css', 'home.js', 'place.js', 'sw.js'];
 
 // Listen for the install event
 self.addEventListener('install', function (event) {
@@ -44,13 +44,10 @@ self.addEventListener('fetch', function (event) {
           return caches.match(request).then(
             (response) =>
               // if response is found in cache return it or return the offline page
-              response ||
-              caches.match('offline.html').then((response) => response)
+              response || caches.match('offline.html')
           );
         })
     );
-
-    return;
   }
 
   // CSS & JavaScript w/ Offline first strategy
@@ -68,7 +65,6 @@ self.addEventListener('fetch', function (event) {
         );
       })
     );
-    return;
   }
 
   // Cache Image files as they're requested
