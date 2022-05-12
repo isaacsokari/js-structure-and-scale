@@ -32,6 +32,7 @@ self.addEventListener('fetch', function (event) {
     event.respondWith(
       fetch(request)
         .then(function (response) {
+          // NOTE: if you don't make a copy of the response, the sw will throw an error that the response is in use, and not cache it.
           let copy = response.clone();
           // add the copy to the cache
           event.waitUntil(
