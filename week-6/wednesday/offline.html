@@ -11,7 +11,8 @@
 <body>
   <h1>Uh oh! You're offline.</h1>
 
-  <p>You'll be able to view your favorite places as soon as you're back online.</p>
+  <p>You'll be able to view your favorite places as soon as you're back online. For now, here are some pages you've
+    recently visited.</p>
 
   <div id="previously-visited"></div>
 </body>
@@ -22,14 +23,6 @@
 
     caches.open('pages').then(function (cache) {
       cache.keys().then(function (keys) {
-        // Do stuff...
-      });
-    });
-  }
-
-  if (navigator && navigator.serviceWorker) {
-    caches.open('pages').then(function (cache) {
-      cache.keys().then(function (keys) {
 
         let offline = document.querySelector('#previously-visited');
 
@@ -37,12 +30,8 @@
           `
         <ul>
 					${keys.map(function (key) {
-
-            // If the item isn't an HTML file, skip to the next one
-            // This is only needed if you're keeping everything in one cache
             if (!key.headers.get('Accept').includes('text/html') || key.url.includes('/offline')) return '';
 
-            // Otherwise, create a list item with a link to the page
             return `<li><a href="${key.url}">${key.url}</a></li>`;
 
           }).join('')}
