@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Newport Cliff Walk | Places</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+	<nav>
+		<a href="index.html"><span aria-hidden="true">🧭</span> Places</a>
+	</nav>
+
+	<h1>Newport Cliff Walk</h1>
+
+	<p class="place-img">
+		<img
+			alt="A rocky cliff along the right, with gentle waves lapping against them from the right. Mansions are set back along the top of the cliff."
+			src="https://cdn.gomakethings.com/academy/places/cliff-walk.jpg" width="1440" height="960">
+	</p>
+
+	<p class="place-description">A somewhat dangerous, 3.5 mile walk along the mansion-adorned cliffs of Newport.
+		Spectacular views.</p>
+
+	<p class="place-contact">
+	<address>
+		<span class="visually-hidden">It's located at</span>
+		175 Memorial Blvd, Newport, RI 02840
+	</address><br>
+	<a
+		href="https://www.newport-discovery-guide.com/newport-cliff-walk.html">https://www.newport-discovery-guide.com/newport-cliff-walk.html</a>
+	</p>
+
+	<div data-controls="cliff-walk"></div>
+
+	<script src="places.js"></script>
+
+	<script>
+		if (navigator && navigator.serviceWorker) {
+			navigator.serviceWorker.register('sw.js');
+
+			// Cleanup old cache on page load
+			if (navigator.serviceWorker.controller) {
+				window.addEventListener('load', function () {
+					navigator.serviceWorker.controller.postMessage('cleanUp');
+				});
+			}
+		}
+	</script>
+</body>
+
+</html>
