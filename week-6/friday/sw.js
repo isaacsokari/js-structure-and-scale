@@ -1,5 +1,12 @@
 let coreAssets = ['offline.html', 'style.css', 'home.js', 'place.js', 'sw.js'];
 
+const version = '1';
+
+const coreId = `${version}_core`;
+const pageId = `${version}_pages`;
+const imgId = `${version}_imgs`;
+const cacheIDs = [coreId, pageId, imgId];
+
 // Listen for the install event
 self.addEventListener('install', function (event) {
   // Activate immediately
@@ -7,13 +14,40 @@ self.addEventListener('install', function (event) {
 
   // Cache the core assets
   event.waitUntil(
-    caches.open('core').then(function (cache) {
+    caches.open(coreId).then(function (cache) {
       for (let asset of coreAssets) {
         cache.add(new Request(asset));
       }
 
       return cache;
     })
+  );
+});
+
+// On version update, remove old cached files
+self.addEventListener('activate', function (event) {
+  // testing update
+  event.waitUntil(
+    caches
+      .keys()
+      .then(function (keys) {
+        // Get the keys of the caches to remove
+        // we're removing all keys not present in the current version list
+        let keysToRemove = keys.filter(function (key) {
+          return !cacheIDs.includes(key);
+        });
+
+        // Delete each cache
+        let removed = keysToRemove.map(function (key) {
+          return caches.delete(key);
+        });
+
+        // using promise.all as we want all promises to be resolved first, duh!
+        return Promise.all(removed);
+      })
+      .then(function () {
+        return self.clients.claim();
+      })
   );
 });
 
@@ -36,7 +70,7 @@ self.addEventListener('fetch', function (event) {
           let copy = response.clone();
           // add the copy to the cache
           event.waitUntil(
-            caches.open('pages').then((cache) => cache.put(request, copy))
+            caches.open(pageId).then((cache) => cache.put(request, copy))
           );
 
           return response;
@@ -79,7 +113,7 @@ self.addEventListener('fetch', function (event) {
             if (request.headers.get('Accept').includes('image')) {
               let copy = response.clone();
               event.waitUntil(
-                caches.open('img').then(function (cache) {
+                caches.open(imgId).then(function (cache) {
                   return cache.put(request, copy);
                 })
               );
@@ -123,6 +157,6 @@ self.addEventListener('message', function (event) {
   if (event.data !== 'cleanUp') return;
 
   // Trim the cache
-  trimCache('pages', limits.pages);
-  trimCache('img', limits.imgs);
+  trimCache(pageId, limits.pages);
+  trimCache(imgId, limits.imgs);
 });
